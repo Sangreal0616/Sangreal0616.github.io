@@ -32,7 +32,7 @@
                       I did my B.S at <a href="https://apsl.inha.ac.kr/logistics/index.do">Inha University Asia Pacific School of Logistics</a> and <a href="https://scsc.inha.ac.kr/"> Software Convergence Engineering</a>.
                     </p>
                     <p style="text-align:center">
-                      <a href="mailto:sungwoo.hwang6@gmail.com">Email</a> &nbsp;/&nbsp;
+                      <a href="mailto:sungwoo.hwang6@gmail.com" id="email-copy-link" onclick="copyEmail(event)">Email</a> &nbsp;/&nbsp;
                       <a href="https://github.com/Sangreal0616?tab=repositories">Github</a>
                     </p>
                   </td>
@@ -197,5 +197,31 @@
         </tr>
       </tbody>
     </table>
+
+    <script>
+      function copyEmail(event) {
+        event.preventDefault();
+        const email = 'sungwoo.hwang6@gmail.com';
+        const link = document.getElementById('email-copy-link');
+        const original = link.textContent;
+        const showFeedback = (msg) => {
+          link.textContent = msg;
+          setTimeout(() => { link.textContent = original; }, 1500);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email)
+            .then(() => showFeedback('Copied!'))
+            .catch(() => showFeedback(email));
+        } else {
+          const textarea = document.createElement('textarea');
+          textarea.value = email;
+          document.body.appendChild(textarea);
+          textarea.select();
+          try { document.execCommand('copy'); showFeedback('Copied!'); }
+          catch (e) { showFeedback(email); }
+          document.body.removeChild(textarea);
+        }
+      }
+    </script>
   </body>
 </html>
