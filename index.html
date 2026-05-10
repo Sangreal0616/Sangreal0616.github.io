@@ -1,227 +1,544 @@
-<!DOCTYPE HTML>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+<meta charset="utf-8">
+<title>Sung Woo Hwang (Daniel) — PhD Applicant</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Sung Woo Hwang (Daniel)">
+<link rel="icon" type="image/jpeg" href="images/SungWoo_Hwang.jpg">
+<style>
+/* ============================================================
+   Daniel Hwang Academic Site — Colors & Type
+   Derived from jonbarron.info template (Lato + classic blue/orange)
+   ============================================================ */
 
-    <title>Sung Woo Hwang (Daniel)</title>
+/* ----- Webfonts (Google Fonts CDN, matching the reference) ----- */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap');
 
-    <meta name="author" content="Sung Woo Hwang (Daniel)">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    
-  </head>
+:root {
+  /* ----- Color palette ----- */
+  /* Foreground / text */
+  --fg-1: #000000;          /* primary text — pure black like the reference */
+  --fg-2: #333333;           /* secondary text */
+  --fg-3: #777777;           /* tertiary text / captions */
 
-  <body>
-    <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-      <tbody>
-        <tr style="padding:0px">
-          <td style="padding:0px">
+  /* Background */
+  --bg-1: #ffffff;           /* page background — pure white */
+  --bg-2: #fafafa;           /* subtle inset / tables */
+  --bg-3: #f0f0f0;           /* dividers / hairlines */
 
-            <!-- Profile Section -->
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-              <tbody>
-                <tr style="padding:0px">
-                  <td style="padding:2.5%;width:63%;vertical-align:middle">
-                    <p class="name" style="text-align: center;">
-                      Sung Woo Hwang (Daniel)
-                    </p>
-                    <p>
-                      I'm a M.S candidate at <a href="https://inhaece.co.kr/">Inha University Graduate school of Electrical and Computer Engineering</a> in Incheon(South Korea). I am member of <a href="https://sites.google.com/view/vcl-lab/home?authuser=0">VCL(Visual Computing and Learning Lab)</a> where I am advised by <a href="https://sites.google.com/view/vcl-lab/members/current?authuser=0"> In Kyu Park</a>(and Co-advised by <a href="https://nmhkahn.github.io/"> Nam Hyuk Ahn</a>).
-                      At VCL I'm researching on Generative Model, Gen AI + X (Logistics, Supply Chain).
-                      I did my B.S at <a href="https://apsl.inha.ac.kr/logistics/index.do">Inha University Asia Pacific School of Logistics</a> and <a href="https://scsc.inha.ac.kr/"> Software Convergence Engineering</a>.
-                    </p>
-                    <p style="text-align:center">
-                      <a href="mailto:sungwoo.hwang6@gmail.com" class="email-copy-link" onclick="copyEmail(event)">Email</a> &nbsp;/&nbsp;
-                      <a href="https://github.com/Sangreal0616?tab=repositories">Github</a>
-                    </p>
-                  </td>
-                  <td style="padding:2.5%;width:37%;max-width:37%">
-                    <a href="images/Costa_Sungwoo.jpg"><img style="width:100%;max-width:100%;object-fit: cover; border-radius: 50%;" alt="profile photo" src="images/Costa_Sungwoo.jpg" class="hoverZoomLink"></a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  /* Brand accents — the iconic Jon Barron template pair */
+  --link: #1772d0;           /* link blue (resting) */
+  --link-hover: #f09228;     /* warm orange (hover/focus) */
 
-            <!-- About Me Section -->
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-              <tbody>
-                <tr>
-                  <td style="padding:16px;width:100%;vertical-align:middle">
-                    <h2>About Me</h2>
-                    <p>Hello! Outside of research, I enjoy running marathons and listening to music.<br>
-                    I love a wide range of genres, from 70s classics to modern music, with bossa nova being my favorite.<br> 
-                    Two of my favorite songs are João Gilberto’s '<em>The Girl from Ipanema</em>' and Jobim’s '<em>Chega de Saudade</em>'.<br>
-                    I usually run 10 km a day while enjoying the scenery, and I dream of running around the world someday.<br>
-                    I also enjoy cooking and sharing food, learning Spanish, and exploring Latin culture.</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  /* Highlight (used for `span.highlight` — paper-title emphasis) */
+  --highlight-bg: #ffffd0;   /* pale yellow */
 
-            <!-- Education Section -->
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-              <tbody>
-                <tr>
-                  <td style="padding:16px;width:100%;vertical-align:middle">
-                    <h2>Education</h2>
-                    <ul>
-                      <li>B.S. in Logistics (Double Major: Software Convergence Engineering), Inha University (Mar 2020 – Aug 2025)</li>
-                      <li>M.S. Candidate, <a href="https://sites.google.com/view/vcl-lab/home?authuser=0">Visual Computing and Learning Lab</a>, Dept. of Electrical and Computer Engineering, Inha University <br>(Sep 2025 – Present)</li>
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            
-            <!-- Research Section -->
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-              <tbody>
-                <tr>
-                  <td style="padding:16px;width:100%;vertical-align:middle">
-                    <h2>Research</h2>
-                    <p>
-                      I am motivated by the challenge of solving logistics problem with AI and OR.<br>
-                      My current interests include Generative AI, Agents, and Neural net driven optimization.<br>
-                      I believe AI should accelerate decision-making while providing transparent and reliable reasoning for its outcomes.
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  /* Semantic helpers */
+  --rule: #e5e5e5;           /* subtle horizontal rule color */
+  --code-bg: #f6f6f6;
+  --code-fg: #c7254e;        /* classic Bootstrap-era inline code red */
 
-            <!-- Publications Section -->
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-              <tbody>
-                <tr>
-                  <td style="padding:16px;width:100%;vertical-align:middle">
-                    <h2>Publications</h2>
-                    <ul>
-                      <li>Not Yet!</li>
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  /* ----- Type ----- */
+  --font-sans: 'Lato', Verdana, Helvetica, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 
-            <!-- Experience Section -->
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-              <tbody>
-                <tr>
-                  <td style="padding:16px;width:100%;vertical-align:middle">
-                    <h2>Experience</h2>
-                    <ul>
-                      <li>Research Intern, Logistics Optimization Laboratory (<a href="https://apsl.inha.ac.kr/logistics/4373/subview.do?enc=Zm5jdDF8QEB8JTJGZGVwYXJ0bWVudEludHJvJTJGbG9naXN0aWNzJTJGMTE5MCUyRjEyMDMlMkZjb2xsZWdlUHJvZlZpZXcuZG8lM0ZzaXRlSWQlM0Rsb2dpc3RpY3MlMjZpbmhhaWQlM0QwMzQwNzgwNjAyMjgyNDIxMjBDNTVEMzJCNkJCQzFFMDYwREU0NDlEODJENTcyMUYzQkVCODE2NTk3QkJGMTVENkQxNTEwMjQ1MDM5M0RFQzRERjdCQzQxQjE4RDBCNkY4M0YwMTUxQTVFOTg5MTk3M0QzRUFFREE2OTY4REIyNiUyNg%3D%3D">Professor. Hwa Joong Kim</a>), <br>Graduate School of Logistics, Inha University (Oct 2023 - Jan 2025)</li>
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  /* Font sizes — match the original: body 14px, h2 22px, name 32px */
+  --fs-name: 32px;           /* the big name banner */
+  --fs-h1: 28px;
+  --fs-h2: 22px;             /* section headers ("About Me", "Education"…) */
+  --fs-h3: 18px;
+  --fs-paper: 14px;          /* .papertitle — bold body */
+  --fs-body: 14px;           /* paragraphs, list items, links */
+  --fs-small: 12px;          /* footer text */
 
-            <!-- Other Experience Section -->
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-              <tbody>
-                <tr>
-                  <td style="padding:16px;width:100%;vertical-align:middle">
-                    <h2>Other Experience</h2>
-                    <ul>
-                      <li>Sergeant, Republic of Korea Army Special Warfare Command(SWC), 7th Airborne Special Forces Brigade, <br>(Jul 2021 - Feb 2023)</li>
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  /* Weights */
+  --fw-regular: 400;
+  --fw-bold: 700;            /* used for .papertitle and <strong> */
 
-            <!-- Awards & Honors Section -->
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-              <tbody>
-                <tr>
-                  <td style="padding:16px;width:100%;vertical-align:middle">
-                    <h2>Awards & Honors</h2>
-                    <ul>
-                      <li>Not Yet!</li>
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  /* Line heights */
+  --lh-body: 1.5;
+  --lh-heading: 1.2;
 
-            <!-- Communication Skill -->
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-              <tbody>
-                <tr>
-                  <td style="padding:16px;width:100%;vertical-align:middle">
-                    <h2>Languages</h2>
-                    <ul>
-                      <li>Korean(Native)</li>
-                      <li>English(Intermediate)</li>
-                      <li>Spanish(Basic)</li>
-                    </ul>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  /* ----- Spacing (table-layout era — mostly padding-driven) ----- */
+  --pad-cell: 16px;          /* td padding inside section tables */
+  --pad-profile: 2.5%;       /* % padding around the hero/profile cells */
+  --gap-section: 0px;        /* sections butt directly against each other */
+  --max-content: 800px;      /* outer table max-width */
 
-            <!-- Contact Section -->
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-              <tbody>
-                <tr>
-                  <td style="padding:16px;width:100%;vertical-align:middle">
-                    <h2>Contact</h2>
-                    <p>
-                      Email: <a href="mailto:sungwoo.hwang6@gmail.com" class="email-copy-link" onclick="copyEmail(event)">Click to mail</a><br>
-                      GitHub: <a href="https://github.com/Sangreal0616">Click to access</a><br>
-                      LinkedIn: <a href="https://www.linkedin.com/in/sung-woo-hwang-6a5749332">Click to acess</a><br>
-                      Google Scholar: -
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  /* ----- Borders / radii ----- */
+  --radius-photo: 50%;       /* avatar — circular */
+  --radius-box: 10px;        /* .colored-box rounded corners */
+  --radius-none: 0px;        /* most elements are unrounded */
 
-            <!-- Footer -->
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-              <tbody>
-                <tr>
-                  <td style="padding:0px">
-                    <br>
-                    <p style="text-align:right;font-size:small;">
-                      Feel free to steal this website's <a href="https://github.com/jonbarron/jonbarron_website">source code</a>. <strong>Do not</strong> scrape the HTML from this page itself, as it includes analytics tags that you do not want on your own website — use the github code instead. Also, consider using <a href="https://leonidk.com/">Leonid Keselman</a>'s <a href="https://github.com/leonidk/new_website">Jekyll fork</a> of this page.
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  /* ----- Motion ----- */
+  --t-fade: 0.2s ease-in-out;
+}
 
-          </td>
-        </tr>
-      </tbody>
-    </table>
+/* ============================================================
+   Semantic styles — mirror the reference stylesheet exactly
+   ============================================================ */
 
-    <script>
-      function copyEmail(event) {
-        event.preventDefault();
-        const email = 'sungwoo.hwang6@gmail.com';
-        const link = event.currentTarget;
-        const original = link.textContent;
-        const showFeedback = (msg) => {
-          link.textContent = msg;
-          setTimeout(() => { link.textContent = original; }, 1500);
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(email)
-            .then(() => showFeedback('Copied!'))
-            .catch(() => showFeedback(email));
-        } else {
-          const textarea = document.createElement('textarea');
-          textarea.value = email;
-          document.body.appendChild(textarea);
-          textarea.select();
-          try { document.execCommand('copy'); showFeedback('Copied!'); }
-          catch (e) { showFeedback(email); }
-          document.body.removeChild(textarea);
-        }
-      }
-    </script>
-  </body>
+body, td, th, tr, p, a, li, ul {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  color: var(--fg-1);
+  line-height: var(--lh-body);
+}
+
+strong {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+}
+
+h1 {
+  margin: 0;
+  font-weight: var(--fw-regular);
+  font-family: var(--font-sans);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-heading);
+}
+
+h2 {
+  margin: 0;
+  font-weight: var(--fw-regular);
+  font-family: var(--font-sans);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
+}
+
+h3 {
+  margin: 0;
+  font-weight: var(--fw-bold);
+  font-family: var(--font-sans);
+  font-size: var(--fs-h3);
+}
+
+.name {
+  padding-top: 20px;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-name);
+  font-weight: var(--fw-regular);
+}
+
+.papertitle {
+  font-family: var(--font-sans);
+  font-size: var(--fs-paper);
+  font-weight: var(--fw-bold);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  color: var(--link-hover);
+  text-decoration: none;
+}
+
+span.highlight {
+  background-color: var(--highlight-bg);
+}
+
+.colored-box {
+  color: var(--fg-1);
+  padding: 20px;
+  display: inline-block;
+  border-radius: var(--radius-box);
+}
+
+.fade,
+.two {
+  transition: opacity var(--t-fade);
+  -moz-transition: opacity var(--t-fade);
+  -webkit-transition: opacity var(--t-fade);
+}
+
+</style>
+<style>
+  html, body { background: #fff; }
+  body { margin: 0; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+
+  /* sticky mini nav */
+  .topnav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: saturate(140%) blur(6px);
+    -webkit-backdrop-filter: saturate(140%) blur(6px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .topnav .row {
+    max-width: 860px; margin: 0 auto; padding: 10px 16px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-sans); font-size: 13px;
+  }
+  .topnav .name { font-weight: 700; color: var(--fg-1); font-size: 13px; padding: 0; margin: 0; }
+  .topnav nav a { margin-left: 18px; color: var(--fg-2); }
+  .topnav nav a:hover { color: var(--link-hover); }
+
+  /* hero — circular frame, head positioned to stay visible */
+  .hero { display: grid; grid-template-columns: 1fr 240px; gap: 32px;
+          padding: 36px 0 22px; align-items: center; }
+  .hero .portrait-wrap {
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--rule);
+  }
+  .hero img.portrait {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+    display: block;
+  }
+  .hero .name { padding: 0; font-size: 30px; line-height: 1.15; margin: 0 0 10px; }
+  .hero .intro { font-size: 15px; line-height: 1.6; color: var(--fg-1); margin: 0 0 14px; }
+  .hero .links { font-size: 13.5px; color: var(--fg-2); }
+  .hero .links a { font-weight: 700; }
+  .applying {
+    display: inline-block; padding: 3px 9px; font-size: 11px;
+    font-family: var(--font-mono); border-radius: 3px;
+    background: #fff8d6; color: #8a5a00; margin-bottom: 10px;
+    border: 1px solid #f3e0a0;
+  }
+
+  /* downloads strip */
+  .downloads {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+    padding: 14px 0 0;
+  }
+  .dl {
+    display: flex; align-items: center; justify-content: center;
+    padding: 14px 12px;
+    border: 1px solid var(--rule); border-radius: 6px;
+    background: #fafafa;
+    text-decoration: none;
+    font-size: 14px; font-weight: 700; color: var(--fg-1);
+  }
+  .dl.ready { background: #fff; border-color: var(--link); color: var(--link); }
+  .dl.ready:hover { background: #f0f7ff; color: var(--link-hover); border-color: var(--link-hover); }
+  .dl.pending { cursor: default; opacity: 0.65; }
+
+  /* sections */
+  section { padding: 26px 0 8px; border-top: 1px solid var(--rule); }
+  section:first-of-type { border-top: none; }
+  section h2 {
+    font-size: 22px; font-weight: 400; margin: 0 0 14px;
+  }
+  section p { margin: 0 0 10px; font-size: 14px; line-height: 1.6; }
+
+  /* research interests */
+  .ri { font-size: 14px; line-height: 1.65; }
+  .ri .lead {
+    font-size: 15px; font-weight: 700; margin: 0 0 10px;
+    color: var(--fg-1);
+  }
+  .ri .meta-table {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    row-gap: 10px;
+    margin-top: 14px;
+    font-size: 14px;
+  }
+  .ri .meta-table .lbl {
+    font-size: 12px; font-family: var(--font-mono);
+    color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.05em;
+    padding-top: 3px;
+  }
+  .ri .meta-table ol {
+    margin: 0; padding-left: 18px;
+  }
+  .ri .meta-table ol li { margin-bottom: 4px; }
+  .ri .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ri .pill {
+    font-size: 12.5px;
+    padding: 3px 10px; border: 1px solid var(--rule); border-radius: 12px;
+    color: var(--fg-1); background: #fff;
+  }
+
+  /* publications */
+  .pubs { display: grid; gap: 22px; }
+  .pub-block h3 {
+    font-size: 14px; font-weight: 700;
+    margin: 0 0 10px;
+    color: var(--fg-1);
+    letter-spacing: 0.02em;
+  }
+  .pub-block .sub {
+    font-size: 12px; font-family: var(--font-mono);
+    color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.05em;
+    margin: 14px 0 8px;
+  }
+  .pub-block .empty {
+    font-size: 13.5px; color: var(--fg-3); font-style: italic;
+    padding: 8px 12px; border: 1px dashed var(--rule); border-radius: 4px;
+    background: #fcfcfc;
+  }
+
+  /* publication entry — thumb + meta, compact */
+  .pub {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f3f3;
+  }
+  .pub:last-child { border-bottom: none; }
+  .pub .thumb {
+    width: 120px; height: 80px;
+    background: #f0f0f0; border: 1px solid var(--rule); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    font-size: 10px; color: var(--fg-3); font-family: var(--font-mono);
+    text-align: center;
+  }
+  .pub .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pub .meta { font-size: 13.5px; line-height: 1.5; }
+  .pub .ttl { font-weight: 700; font-size: 14px; color: var(--fg-1); margin: 0 0 2px; }
+  .pub .authors { color: var(--fg-2); font-size: 12.5px; margin: 0 0 2px; }
+  .pub .authors b { color: var(--fg-1); }
+  .pub .venue { color: var(--fg-3); font-size: 12px; font-style: italic; margin: 0 0 4px; }
+  .pub .desc { color: var(--fg-1); font-size: 13px; margin: 4px 0 6px; line-height: 1.5; }
+  .pub .actions { font-size: 12px; font-family: var(--font-mono); }
+  .pub .actions a {
+    margin-right: 10px; padding: 1px 6px;
+    border: 1px solid var(--link); border-radius: 3px;
+    color: var(--link);
+  }
+  .pub .actions a:hover { color: var(--link-hover); border-color: var(--link-hover); }
+
+  /* education / experience */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-bottom: 12px; }
+  .item .body { font-size: 14px; line-height: 1.55; }
+  .item .body .org { font-weight: 700; }
+  .item .body .role { color: var(--fg-1); }
+  .item .body .sub { color: var(--fg-2); font-size: 13px; }
+  .item .when {
+    font-size: 12.5px; color: var(--fg-3);
+    font-family: var(--font-mono); white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  /* about (personal — bottom) */
+  .about { font-size: 13.5px; color: var(--fg-2); line-height: 1.6; }
+  .about em { color: var(--fg-1); }
+
+  /* footer */
+  footer {
+    margin-top: 36px; padding: 18px 0 28px;
+    border-top: 1px solid var(--rule);
+    font-size: 12px; color: var(--fg-3); display: flex; justify-content: space-between;
+  }
+  footer a { color: var(--fg-3); }
+
+  @media (max-width: 720px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero .portrait-wrap { width: 180px; height: 180px; margin: 0 auto; }
+    .downloads { grid-template-columns: repeat(2, 1fr); }
+    .ri .meta-table { grid-template-columns: 1fr; row-gap: 4px; }
+    .ri .meta-table .lbl { padding-top: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="row">
+    <p class="name">Sung Woo Hwang (Daniel)</p>
+    <nav>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#education">Education</a>
+      <a href="#documents">Documents</a>
+    </nav>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div>
+      <p class="name">Sung Woo Hwang (Daniel)</p>
+      <p class="intro">
+        I am an M.S. candidate at the <a href="https://sites.google.com/view/vcl-lab/home">VCL Lab</a>, Inha University, advised by <a href="https://sites.google.com/view/vcl-lab/members/current">In Kyu Park</a> and co-advised by <a href="https://nmhkahn.github.io/">Nam Hyuk Ahn</a>. My research sits at the intersection of machine learning and operations research, with the goal of building decision-making systems that are both data-driven and verifiably useful for real supply-chain problems.
+      </p>
+      <p class="links">
+        <a href="#" class="email-copy-link" onclick="copyEmail(event)">Email (click to copy)</a> &nbsp;/&nbsp;
+        <a href="https://github.com/Sangreal0616">GitHub</a> &nbsp;/&nbsp;
+        <a href="https://www.linkedin.com/in/sung-woo-hwang-6a5749332">LinkedIn</a> &nbsp;/&nbsp;
+        <a href="#documents">Documents</a>
+      </p>
+    </div>
+    <div class="portrait-wrap">
+      <img class="portrait" src="images/SungWoo_Hwang.jpg" alt="Sung Woo Hwang">
+    </div>
+  </header>
+
+  <!-- DOCUMENTS -->
+  <section id="documents" style="border-top:none; padding-top: 0;">
+    <h2>Documents</h2>
+    <div class="downloads">
+      <a class="dl pending" aria-disabled="true">CV</a>
+      <a class="dl pending" aria-disabled="true">SOP</a>
+      <a class="dl pending" aria-disabled="true">Transcript</a>
+      <a class="dl pending" aria-disabled="true">GRE</a>
+      <a class="dl pending" aria-disabled="true">TOEFL</a>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <h2>Research Interests</h2>
+    <div class="ri">
+      <p class="lead">Machine Learning for Operations Research.</p>
+      <ol style="padding-left: 22px; margin: 0;">
+        <li><b>LLM-based optimization modeling</b> — using language models to translate natural-language problem specifications into solver-ready formulations.</li>
+        <li><b>Neural Combinatorial Optimization</b> — learned policies and structures for routing, scheduling, and assignment problems.</li>
+      </ol>
+
+      <div class="meta-table">
+        <div class="lbl">Application Areas</div>
+        <div class="pills">
+          <span class="pill">Supply Chain</span>
+          <span class="pill">Logistics</span>
+          <span class="pill">LLM-Agent decision systems</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <h2>Publications</h2>
+    <div class="pubs">
+
+      <div class="empty" style="padding: 22px 0;">
+        No publications yet — currently in preparation. Please check back, or feel free to email me for ongoing work.
+      </div>
+
+      <!--
+      ============================================================
+      TEMPLATE for adding a publication later.
+      Copy the markup below into <div class="pubs"> and remove the
+      .empty placeholder above when adding your first paper.
+
+      <div class="pub-block">
+        <h3>International</h3>
+        <div class="sub">Journal</div>
+        <div class="pub">
+          <div class="thumb">[ figure ]</div>
+          <div class="meta">
+            <p class="ttl">Paper title here</p>
+            <p class="authors"><b>S. W. Hwang</b>, Co-author A, Co-author B</p>
+            <p class="venue">Venue name &middot; Year</p>
+            <p class="desc">One-line summary.</p>
+            <p class="actions">
+              <a href="#">paper</a><a href="#">code</a><a href="#">demo</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      Notes:
+      - h3 values: "International" or "Domestic (Korea)"
+      - sub values: "Journal" or "Conference" or "Workshop"
+      - thumb can be plain text or an <img src="...">
+      ============================================================
+      -->
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <h2>Education</h2>
+    <div class="item">
+      <div class="body">
+        <span class="org">Inha University</span> — M.S. Candidate, Electrical &amp; Computer Engineering<br>
+        <span class="sub"><a href="https://sites.google.com/view/vcl-lab/home">Visual Computing &amp; Learning Lab</a> · advised by In Kyu Park, co-advised by Nam Hyuk Ahn</span>
+      </div>
+      <div class="when">Sep 2025 – Present</div>
+    </div>
+    <div class="item">
+      <div class="body">
+        <span class="org">Inha University</span> — B.S., Logistics<br>
+        <span class="sub">Double major: Software Convergence Engineering</span>
+      </div>
+      <div class="when">Mar 2020 – Aug 2025</div>
+    </div>
+  </section>
+
+  <!-- RESEARCH EXPERIENCE -->
+  <section id="experience">
+    <h2>Research Experience</h2>
+    <div class="item">
+      <div class="body">
+        <span class="org">Logistics Optimization Laboratory</span>, Graduate School of Logistics, Inha University<br>
+        <span class="sub">Research Intern with <a href="https://apsl.inha.ac.kr/logistics/4373/subview.do">Prof. Hwa Joong Kim</a></span>
+      </div>
+      <div class="when">Oct 2023 – Jan 2025</div>
+    </div>
+  </section>
+
+  <!-- OTHER EXPERIENCE -->
+  <section id="other">
+    <h2>Other Experience</h2>
+    <div class="item">
+      <div class="body">
+        <span class="org">Republic of Korea Army Special Warfare Command</span><br>
+        <span class="sub">Sergeant, 7th Airborne Special Forces Brigade · Mandatory military service</span>
+      </div>
+      <div class="when">Jul 2021 – Feb 2023</div>
+    </div>
+  </section>
+
+  <!-- ABOUT (personal) -->
+  <section id="about">
+    <h2>Personal</h2>
+    <p class="about">
+      Outside of research I run marathons (about 10&nbsp;km a day), cook, and learn Spanish. I love a wide range of music — from 70s classics to bossa nova, with João&nbsp;Gilberto's <em>'The Girl from Ipanema'</em> and Jobim's <em>'Chega de Saudade'</em> as longtime favorites.
+    </p>
+    <h3 style="font-size:13px; font-weight:700; margin: 14px 0 6px; color: var(--fg-1);">Languages</h3>
+    <ul style="margin:0; padding-left: 20px; font-size: 13.5px; color: var(--fg-2); line-height: 1.7;">
+      <li>Korean (native)</li>
+      <li>English (intermediate)</li>
+      <li>Spanish (basic)</li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>Last updated May 2026</span>
+  </footer>
+
+</div>
+
+<script>
+function copyEmail(event) {
+  event.preventDefault();
+  const email = 'sungwoo.hwang6@gmail.com';
+  const link = event.currentTarget;
+  const original = link.textContent;
+  const showFeedback = (msg) => {
+    link.textContent = msg;
+    setTimeout(() => { link.textContent = original; }, 1500);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(email)
+      .then(() => showFeedback('Copied!'))
+      .catch(() => showFeedback(email));
+  } else {
+    showFeedback('Copied!');
+  }
+}
+</script>
+
+</body>
 </html>
