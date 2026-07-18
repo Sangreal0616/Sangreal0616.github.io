@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Miscellaneous — Sung Woo Hwang</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Sung Woo Hwang">
+<link rel="icon" type="image/jpeg" href="images/SungWoo_Hwang.jpg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page-misc">
+
+<div class="topnav">
+  <div class="row">
+    <p class="name"><a href="index.html">Sung Woo Hwang</a></p>
+    <nav>
+      <a href="index.html#research">Research</a>
+      <a href="index.html#publications">Publications</a>
+      <a href="index.html#education">Education</a>
+      <a href="misc.html" aria-current="page">Miscellaneous</a>
+    </nav>
+  </div>
+</div>
+
+<div class="container">
+
+  <section id="misc">
+    <h2>Miscellaneous</h2>
+    <p>A few photos from outside the lab.</p>
+
+    <!-- data-count is kept in sync by scripts/build_misc.py -->
+    <div class="gallery" id="gallery" data-count="11">
+      <div class="stage">
+        <img class="haze" alt="" aria-hidden="true">
+        <!-- two layers so one can decode underneath while the other is visible -->
+        <img class="shot" alt="">
+        <img class="shot" alt="">
+        <button class="gnav prev" type="button" aria-label="Previous photo">&#8249;</button>
+        <button class="gnav next" type="button" aria-label="Next photo">&#8250;</button>
+        <p class="count" aria-live="polite"></p>
+      </div>
+      <!-- thumbnails are built in JS so they follow the shuffled order -->
+      <div class="strip"></div>
+    </div>
+
+    <p class="backlink"><a href="index.html">&#8249; Back to main page</a></p>
+  </section>
+
+  <footer>
+    <span>Last updated May 2026</span>
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   Miscellaneous gallery
+   Shuffles the photo order on every visit, then rotates through it
+   one at a time. Arrows and the thumbnail grid below share that order.
+   ============================================================ */
+(function () {
+  var root = document.getElementById('gallery');
+  if (!root) return;
+
+  var COUNT = parseInt(root.getAttribute('data-count'), 10);   // images/misc/01.jpg …
+  if (!COUNT) return;
+  var DELAY = 5000;      // ms between auto-advances
+
+  var stage   = root.querySelector('.stage');
+  var strip   = root.querySelector('.strip');
+  var layers  = root.querySelectorAll('.shot');
+  var haze    = root.querySelector('.haze');
+  var counter = root.querySelector('.count');
+
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+  function view(i)  { return 'images/misc/' + pad(i + 1) + '.jpg'; }
+  function thumb(i) { return 'images/misc/thumbs/' + pad(i + 1) + '.jpg'; }
+
+  // Fisher–Yates — the featured photo differs from visit to visit
+  var order = [];
+  for (var i = 0; i < COUNT; i++) order.push(i);
+  for (var i = order.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = order[i]; order[i] = order[j]; order[j] = t;
+  }
+
+  var buttons = order.map(function (photo, slot) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Show photo ' + (slot + 1) + ' of ' + COUNT);
+    var img = document.createElement('img');
+    img.src = thumb(photo);
+    img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    b.appendChild(img);
+    b.addEventListener('click', function () { go(slot); restart(); });
+    strip.appendChild(b);
+    return b;
+  });
+
+  var pos = 0, front = 0, token = 0;
+
+  function go(slot) {
+    slot = ((slot % COUNT) + COUNT) % COUNT;   // wrap both directions
+    var mine = ++token;
+    pos = slot;
+
+    counter.textContent = (slot + 1) + ' / ' + COUNT;
+    buttons.forEach(function (b, i) {
+      b.setAttribute('aria-current', i === slot ? 'true' : 'false');
+    });
+
+    var back = layers[1 - front];
+    back.src = view(order[slot]);
+    back.alt = 'Personal photo ' + (slot + 1) + ' of ' + COUNT;
+
+    // fade in only once decoded, so a half-drawn image never shows
+    var swap = function () {
+      if (mine !== token) return;              // a newer request superseded this
+      back.classList.add('on');
+      layers[front].classList.remove('on');
+      haze.src = back.src;                     // already decoded, so no extra fetch
+      front = 1 - front;
+    };
+    if (back.decode) back.decode().then(swap).catch(swap);
+    else swap();
+
+    new Image().src = view(order[(slot + 1) % COUNT]);   // preload the next
+  }
+
+  var timer = null;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function start() {
+    if (timer || reduced.matches) return;
+    timer = setInterval(function () { go(pos + 1); }, DELAY);
+  }
+  function stop() { clearInterval(timer); timer = null; }
+  function restart() { stop(); start(); }     // full delay after a manual jump
+
+  root.querySelector('.prev').addEventListener('click', function () { go(pos - 1); restart(); });
+  root.querySelector('.next').addEventListener('click', function () { go(pos + 1); restart(); });
+
+  root.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft')  { go(pos - 1); restart(); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { go(pos + 1); restart(); e.preventDefault(); }
+  });
+
+  // don't rotate while someone is looking at or interacting with a photo
+  stage.addEventListener('mouseenter', stop);
+  stage.addEventListener('mouseleave', start);
+  root.addEventListener('focusin', stop);
+  root.addEventListener('focusout', start);
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop(); else start();
+  });
+
+  go(0);
+  start();
+})();
+</script>
+
+</body>
+</html>

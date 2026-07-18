@@ -1,0 +1,437 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap');
+/* ============================================================
+   Sung Woo Hwang Academic Site — Colors & Type
+   ============================================================ */
+
+/* ----- Webfonts (Google Fonts CDN, matching the reference) ----- */
+
+:root {
+  /* ----- Color palette ----- */
+  /* Foreground / text */
+  --fg-1: #000000;          /* primary text — pure black like the reference */
+  --fg-2: #333333;           /* secondary text */
+  --fg-3: #777777;           /* tertiary text / captions */
+
+  /* Background */
+  --bg-1: #ffffff;           /* page background — pure white */
+  --bg-2: #fafafa;           /* subtle inset / tables */
+  --bg-3: #f0f0f0;           /* dividers / hairlines */
+
+  /* Brand accents — the iconic Jon Barron template pair */
+  --link: #1772d0;           /* link blue (resting) */
+  --link-hover: #f09228;     /* warm orange (hover/focus) */
+
+  /* Highlight (used for `span.highlight` — paper-title emphasis) */
+  --highlight-bg: #ffffd0;   /* pale yellow */
+
+  /* Semantic helpers */
+  --rule: #e5e5e5;           /* subtle horizontal rule color */
+  --code-bg: #f6f6f6;
+  --code-fg: #c7254e;        /* classic Bootstrap-era inline code red */
+
+  /* ----- Type ----- */
+  --font-sans: 'Lato', Verdana, Helvetica, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+  /* Font sizes — match the original: body 14px, h2 22px, name 32px */
+  --fs-name: 32px;           /* the big name banner */
+  --fs-h1: 28px;
+  --fs-h2: 22px;             /* section headers ("About Me", "Education"…) */
+  --fs-h3: 18px;
+  --fs-paper: 14px;          /* .papertitle — bold body */
+  --fs-body: 14px;           /* paragraphs, list items, links */
+  --fs-small: 12px;          /* footer text */
+
+  /* Weights */
+  --fw-regular: 400;
+  --fw-bold: 700;            /* used for .papertitle and <strong> */
+
+  /* Line heights */
+  --lh-body: 1.5;
+  --lh-heading: 1.2;
+
+  /* ----- Spacing (table-layout era — mostly padding-driven) ----- */
+  --pad-cell: 16px;          /* td padding inside section tables */
+  --pad-profile: 2.5%;       /* % padding around the hero/profile cells */
+  --gap-section: 0px;        /* sections butt directly against each other */
+  --max-content: 800px;      /* outer table max-width */
+
+  /* ----- Borders / radii ----- */
+  --radius-photo: 50%;       /* avatar — circular */
+  --radius-box: 10px;        /* .colored-box rounded corners */
+  --radius-none: 0px;        /* most elements are unrounded */
+
+  /* ----- Motion ----- */
+  --t-fade: 0.2s ease-in-out;
+}
+
+/* ============================================================
+   Semantic styles — mirror the reference stylesheet exactly
+   ============================================================ */
+
+body, td, th, tr, p, a, li, ul {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  color: var(--fg-1);
+  line-height: var(--lh-body);
+}
+
+strong {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+}
+
+h1 {
+  margin: 0;
+  font-weight: var(--fw-regular);
+  font-family: var(--font-sans);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-heading);
+}
+
+h2 {
+  margin: 0;
+  font-weight: var(--fw-regular);
+  font-family: var(--font-sans);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
+}
+
+h3 {
+  margin: 0;
+  font-weight: var(--fw-bold);
+  font-family: var(--font-sans);
+  font-size: var(--fs-h3);
+}
+
+.name {
+  padding-top: 20px;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-name);
+  font-weight: var(--fw-regular);
+}
+
+.papertitle {
+  font-family: var(--font-sans);
+  font-size: var(--fs-paper);
+  font-weight: var(--fw-bold);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  color: var(--link-hover);
+  text-decoration: none;
+}
+
+span.highlight {
+  background-color: var(--highlight-bg);
+}
+
+.colored-box {
+  color: var(--fg-1);
+  padding: 20px;
+  display: inline-block;
+  border-radius: var(--radius-box);
+}
+
+.fade,
+.two {
+  transition: opacity var(--t-fade);
+  -moz-transition: opacity var(--t-fade);
+  -webkit-transition: opacity var(--t-fade);
+}
+  html, body { background: #fff; }
+  body { margin: 0; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+
+  /* sticky mini nav */
+  .topnav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: saturate(140%) blur(6px);
+    -webkit-backdrop-filter: saturate(140%) blur(6px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .topnav .row {
+    max-width: 860px; margin: 0 auto; padding: 10px 16px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-sans); font-size: 13px;
+  }
+  .topnav .name { font-weight: 700; color: var(--fg-1); font-size: 13px; padding: 0; margin: 0; }
+  .topnav .name a { color: var(--fg-1); }
+  .topnav .name a:hover { color: var(--link-hover); }
+  .topnav nav a { margin-left: 18px; color: var(--fg-2); }
+  .topnav nav a:hover { color: var(--link-hover); }
+  /* mark the page you're already on */
+  .topnav nav a[aria-current="page"] { color: var(--fg-1); font-weight: 700; }
+
+  .backlink { margin: 18px 0 0; font-size: 13.5px; }
+
+  /* the photo page is short — keep its footer pinned to the bottom on tall
+     screens instead of leaving it stranded mid-viewport */
+  body.page-misc { display: flex; flex-direction: column; min-height: 100vh; }
+  body.page-misc .container { flex: 1 0 auto; display: flex; flex-direction: column; }
+  body.page-misc footer { margin-top: auto; }
+
+  /* hero — circular frame, head positioned to stay visible */
+  .hero { display: grid; grid-template-columns: 1fr 240px; gap: 32px;
+          padding: 36px 0 22px; align-items: center; }
+  .hero .portrait-wrap {
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--rule);
+  }
+  .hero img.portrait {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+    display: block;
+  }
+  .hero .name { padding: 0; font-size: 30px; line-height: 1.15; margin: 0 0 10px; }
+  .hero .intro { font-size: 15px; line-height: 1.6; color: var(--fg-1); margin: 0 0 14px; }
+  .hero .links { font-size: 13.5px; color: var(--fg-2); }
+  .hero .links a { font-weight: 700; }
+  .applying {
+    display: inline-block; padding: 3px 9px; font-size: 11px;
+    font-family: var(--font-mono); border-radius: 3px;
+    background: #fff8d6; color: #8a5a00; margin-bottom: 10px;
+    border: 1px solid #f3e0a0;
+  }
+
+  /* downloads strip */
+  .downloads {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+    padding: 14px 0 0;
+  }
+  .dl {
+    display: flex; align-items: center; justify-content: center;
+    padding: 14px 12px;
+    border: 1px solid var(--rule); border-radius: 6px;
+    background: #fafafa;
+    text-decoration: none;
+    font-size: 14px; font-weight: 700; color: var(--fg-1);
+  }
+  .dl.ready { background: #fff; border-color: var(--link); color: var(--link); }
+  .dl.ready:hover { background: #f0f7ff; color: var(--link-hover); border-color: var(--link-hover); }
+  .dl.pending { cursor: default; opacity: 0.65; }
+
+  /* sections */
+  section { padding: 26px 0 8px; border-top: 1px solid var(--rule); }
+  section:first-of-type { border-top: none; }
+  section h2 {
+    font-size: 22px; font-weight: 400; margin: 0 0 14px;
+  }
+  section p { margin: 0 0 10px; font-size: 14px; line-height: 1.6; }
+
+  /* research interests */
+  .ri { font-size: 14px; line-height: 1.65; }
+  .ri .lead {
+    font-size: 15px; font-weight: 700; margin: 0 0 10px;
+    color: var(--fg-1);
+  }
+  .ri .meta-table {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    row-gap: 10px;
+    margin-top: 14px;
+    font-size: 14px;
+  }
+  .ri .meta-table .lbl {
+    font-size: 12px; font-family: var(--font-mono);
+    color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.05em;
+    padding-top: 3px;
+  }
+  .ri .meta-table ol {
+    margin: 0; padding-left: 18px;
+  }
+  .ri .meta-table ol li { margin-bottom: 4px; }
+  .ri .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ri .pill {
+    font-size: 12.5px;
+    padding: 3px 10px; border: 1px solid var(--rule); border-radius: 12px;
+    color: var(--fg-1); background: #fff;
+  }
+
+  /* publications */
+  .pubs { display: grid; gap: 22px; }
+  .pub-block h3 {
+    font-size: 14px; font-weight: 700;
+    margin: 0 0 10px;
+    color: var(--fg-1);
+    letter-spacing: 0.02em;
+  }
+  .pub-block .sub {
+    font-size: 12px; font-family: var(--font-mono);
+    color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.05em;
+    margin: 14px 0 8px;
+  }
+  .pub-block .empty {
+    font-size: 13.5px; color: var(--fg-3); font-style: italic;
+    padding: 8px 12px; border: 1px dashed var(--rule); border-radius: 4px;
+    background: #fcfcfc;
+  }
+
+  /* publication entry — thumb + meta, compact */
+  .pub {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f3f3;
+  }
+  .pub:last-child { border-bottom: none; }
+  .pub .thumb {
+    width: 120px; height: 80px;
+    background: #f0f0f0; border: 1px solid var(--rule); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    font-size: 10px; color: var(--fg-3); font-family: var(--font-mono);
+    text-align: center;
+  }
+  .pub .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pub .meta { font-size: 13.5px; line-height: 1.5; }
+  .pub .ttl { font-weight: 700; font-size: 14px; color: var(--fg-1); margin: 0 0 2px; }
+  .pub .authors { color: var(--fg-2); font-size: 12.5px; margin: 0 0 2px; }
+  .pub .authors b { color: var(--fg-1); }
+  .pub .venue { color: var(--fg-3); font-size: 12px; font-style: italic; margin: 0 0 4px; }
+  .pub .desc { color: var(--fg-1); font-size: 13px; margin: 4px 0 6px; line-height: 1.5; }
+  .pub .actions { font-size: 12px; font-family: var(--font-mono); }
+  .pub .actions a {
+    margin-right: 10px; padding: 1px 6px;
+    border: 1px solid var(--link); border-radius: 3px;
+    color: var(--link);
+  }
+  .pub .actions a:hover { color: var(--link-hover); border-color: var(--link-hover); }
+
+  /* education / experience */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-bottom: 12px; }
+  .item .body { font-size: 14px; line-height: 1.55; }
+  .item .body .org { font-weight: 700; }
+  .item .body .role { color: var(--fg-1); }
+  .item .body .sub { color: var(--fg-2); font-size: 13px; }
+  .item .when {
+    font-size: 12.5px; color: var(--fg-3);
+    font-family: var(--font-mono); white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  /* about (personal — bottom) */
+  .about { font-size: 13.5px; color: var(--fg-2); line-height: 1.6; }
+  .about em { color: var(--fg-1); }
+
+  /* miscellaneous gallery */
+  .gallery { margin-top: 4px; }
+
+  /* contained stage — the set mixes 3:4 portraits with a 0.27 panorama and a
+     16:9 landscape, so nothing is cropped to a fixed frame */
+  .gallery .stage {
+    position: relative;
+    height: 460px;
+    background: var(--bg-2);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .gallery .shot {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.45s ease-in-out;
+  }
+  .gallery .shot.on { opacity: 1; }
+
+  /* blurred fill behind the photo — the set is mostly 3:4 portrait, which would
+     otherwise leave most of a full-width stage as flat grey */
+  .gallery .haze {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1.18);
+    filter: blur(26px) saturate(1.25);
+    opacity: 0.38;
+    transition: opacity 0.45s ease-in-out;
+  }
+
+  .gallery .gnav {
+    position: absolute; top: 50%;
+    transform: translateY(-50%);
+    width: 36px; height: 36px; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    font: 400 20px/1 var(--font-sans);
+    color: var(--fg-2);
+    background: rgba(255,255,255,0.92);
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: color var(--t-fade), border-color var(--t-fade);
+  }
+  .gallery .gnav:hover,
+  .gallery .gnav:focus-visible { color: var(--link-hover); border-color: var(--link-hover); }
+  .gallery .gnav.prev { left: 12px; }
+  .gallery .gnav.next { right: 12px; }
+
+  .gallery .count {
+    position: absolute; right: 12px; bottom: 10px; margin: 0;
+    padding: 2px 8px;
+    font-family: var(--font-mono); font-size: 11px; color: var(--fg-2);
+    background: rgba(255,255,255,0.92);
+    border: 1px solid var(--rule); border-radius: 10px;
+  }
+
+  /* full contact sheet — every photo, click to jump */
+  .gallery .strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .gallery .strip button {
+    padding: 0; aspect-ratio: 3 / 4;
+    background: var(--bg-2);
+    border: 1px solid var(--rule); border-radius: 4px;
+    overflow: hidden; cursor: pointer;
+    opacity: 0.5;
+    transition: opacity var(--t-fade), border-color var(--t-fade);
+  }
+  .gallery .strip button img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .gallery .strip button:hover,
+  .gallery .strip button:focus-visible { opacity: 1; }
+  .gallery .strip button[aria-current="true"] { opacity: 1; border-color: var(--link); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery .shot { transition: none; }
+  }
+
+  /* footer */
+  footer {
+    margin-top: 36px; padding: 18px 0 28px;
+    border-top: 1px solid var(--rule);
+    font-size: 12px; color: var(--fg-3); display: flex; justify-content: space-between;
+  }
+  footer a { color: var(--fg-3); }
+
+  @media (max-width: 720px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero .portrait-wrap { width: 180px; height: 180px; margin: 0 auto; }
+    .downloads { grid-template-columns: repeat(2, 1fr); }
+    .ri .meta-table { grid-template-columns: 1fr; row-gap: 4px; }
+    .ri .meta-table .lbl { padding-top: 8px; }
+    /* four nav links no longer fit beside the name on a phone */
+    .topnav .row { flex-wrap: wrap; row-gap: 2px; }
+    .topnav nav a { margin: 0 16px 0 0; }
+    .gallery .stage { height: 340px; }
+    .gallery .strip { grid-template-columns: repeat(auto-fill, minmax(62px, 1fr)); }
+  }
