@@ -329,6 +329,92 @@ span.highlight {
   .about { font-size: 13.5px; color: var(--fg-2); line-height: 1.6; }
   .about em { color: var(--fg-1); }
 
+  /* miscellaneous gallery */
+  .gallery { margin-top: 4px; }
+
+  /* contained stage — the set mixes 3:4 portraits with a 0.27 panorama and a
+     16:9 landscape, so nothing is cropped to a fixed frame */
+  .gallery .stage {
+    position: relative;
+    height: 460px;
+    background: var(--bg-2);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .gallery .shot {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.45s ease-in-out;
+  }
+  .gallery .shot.on { opacity: 1; }
+
+  /* blurred fill behind the photo — the set is mostly 3:4 portrait, which would
+     otherwise leave most of a full-width stage as flat grey */
+  .gallery .haze {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1.18);
+    filter: blur(26px) saturate(1.25);
+    opacity: 0.38;
+    transition: opacity 0.45s ease-in-out;
+  }
+
+  .gallery .gnav {
+    position: absolute; top: 50%;
+    transform: translateY(-50%);
+    width: 36px; height: 36px; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    font: 400 20px/1 var(--font-sans);
+    color: var(--fg-2);
+    background: rgba(255,255,255,0.92);
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: color var(--t-fade), border-color var(--t-fade);
+  }
+  .gallery .gnav:hover,
+  .gallery .gnav:focus-visible { color: var(--link-hover); border-color: var(--link-hover); }
+  .gallery .gnav.prev { left: 12px; }
+  .gallery .gnav.next { right: 12px; }
+
+  .gallery .count {
+    position: absolute; right: 12px; bottom: 10px; margin: 0;
+    padding: 2px 8px;
+    font-family: var(--font-mono); font-size: 11px; color: var(--fg-2);
+    background: rgba(255,255,255,0.92);
+    border: 1px solid var(--rule); border-radius: 10px;
+  }
+
+  /* full contact sheet — every photo, click to jump */
+  .gallery .strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .gallery .strip button {
+    padding: 0; aspect-ratio: 3 / 4;
+    background: var(--bg-2);
+    border: 1px solid var(--rule); border-radius: 4px;
+    overflow: hidden; cursor: pointer;
+    opacity: 0.5;
+    transition: opacity var(--t-fade), border-color var(--t-fade);
+  }
+  .gallery .strip button img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .gallery .strip button:hover,
+  .gallery .strip button:focus-visible { opacity: 1; }
+  .gallery .strip button[aria-current="true"] { opacity: 1; border-color: var(--link); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery .shot { transition: none; }
+  }
+
   /* footer */
   footer {
     margin-top: 36px; padding: 18px 0 28px;
@@ -343,6 +429,11 @@ span.highlight {
     .downloads { grid-template-columns: repeat(2, 1fr); }
     .ri .meta-table { grid-template-columns: 1fr; row-gap: 4px; }
     .ri .meta-table .lbl { padding-top: 8px; }
+    /* four nav links no longer fit beside the name on a phone */
+    .topnav .row { flex-wrap: wrap; row-gap: 2px; }
+    .topnav nav a { margin: 0 16px 0 0; }
+    .gallery .stage { height: 340px; }
+    .gallery .strip { grid-template-columns: repeat(auto-fill, minmax(62px, 1fr)); }
   }
 </style>
 </head>
@@ -355,6 +446,7 @@ span.highlight {
       <a href="#research">Research</a>
       <a href="#publications">Publications</a>
       <a href="#education">Education</a>
+      <a href="#misc">Miscellaneous</a>
       <!-- <a href="#documents">Documents</a> -->
     </nav>
   </div>
@@ -517,6 +609,26 @@ span.highlight {
     </ul>
   </section>
 
+  <!-- MISCELLANEOUS -->
+  <section id="misc">
+    <h2>Miscellaneous</h2>
+    <p>A few photos from outside the lab.</p>
+
+    <div class="gallery" id="gallery">
+      <div class="stage">
+        <img class="haze" alt="" aria-hidden="true">
+        <!-- two layers so one can decode underneath while the other is visible -->
+        <img class="shot" alt="">
+        <img class="shot" alt="">
+        <button class="gnav prev" type="button" aria-label="Previous photo">&#8249;</button>
+        <button class="gnav next" type="button" aria-label="Next photo">&#8250;</button>
+        <p class="count" aria-live="polite"></p>
+      </div>
+      <!-- thumbnails are built in JS so they follow the shuffled order -->
+      <div class="strip"></div>
+    </div>
+  </section>
+
   <footer>
     <span>Last updated May 2026</span>
   </footer>
@@ -541,6 +653,112 @@ function copyEmail(event) {
     showFeedback('Copied!');
   }
 }
+
+/* ============================================================
+   Miscellaneous gallery
+   Shuffles the photo order on every visit, then rotates through it
+   one at a time. Arrows and the thumbnail grid below share that order.
+   ============================================================ */
+(function () {
+  var root = document.getElementById('gallery');
+  if (!root) return;
+
+  var COUNT = 16;        // images/misc/01.jpg … 16.jpg
+  var DELAY = 5000;      // ms between auto-advances
+
+  var stage   = root.querySelector('.stage');
+  var strip   = root.querySelector('.strip');
+  var layers  = root.querySelectorAll('.shot');
+  var haze    = root.querySelector('.haze');
+  var counter = root.querySelector('.count');
+
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+  function view(i)  { return 'images/misc/' + pad(i + 1) + '.jpg'; }
+  function thumb(i) { return 'images/misc/thumbs/' + pad(i + 1) + '.jpg'; }
+
+  // Fisher–Yates — the featured photo differs from visit to visit
+  var order = [];
+  for (var i = 0; i < COUNT; i++) order.push(i);
+  for (var i = order.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = order[i]; order[i] = order[j]; order[j] = t;
+  }
+
+  var buttons = order.map(function (photo, slot) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Show photo ' + (slot + 1) + ' of ' + COUNT);
+    var img = document.createElement('img');
+    img.src = thumb(photo);
+    img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    b.appendChild(img);
+    b.addEventListener('click', function () { go(slot); restart(); });
+    strip.appendChild(b);
+    return b;
+  });
+
+  var pos = 0, front = 0, token = 0;
+
+  function go(slot) {
+    slot = ((slot % COUNT) + COUNT) % COUNT;   // wrap both directions
+    var mine = ++token;
+    pos = slot;
+
+    counter.textContent = (slot + 1) + ' / ' + COUNT;
+    buttons.forEach(function (b, i) {
+      b.setAttribute('aria-current', i === slot ? 'true' : 'false');
+    });
+
+    var back = layers[1 - front];
+    back.src = view(order[slot]);
+    back.alt = 'Personal photo ' + (slot + 1) + ' of ' + COUNT;
+
+    // fade in only once decoded, so a half-drawn image never shows
+    var swap = function () {
+      if (mine !== token) return;              // a newer request superseded this
+      back.classList.add('on');
+      layers[front].classList.remove('on');
+      haze.src = back.src;                     // already decoded, so no extra fetch
+      front = 1 - front;
+    };
+    if (back.decode) back.decode().then(swap).catch(swap);
+    else swap();
+
+    new Image().src = view(order[(slot + 1) % COUNT]);   // preload the next
+  }
+
+  var timer = null;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function start() {
+    if (timer || reduced.matches) return;
+    timer = setInterval(function () { go(pos + 1); }, DELAY);
+  }
+  function stop() { clearInterval(timer); timer = null; }
+  function restart() { stop(); start(); }     // full delay after a manual jump
+
+  root.querySelector('.prev').addEventListener('click', function () { go(pos - 1); restart(); });
+  root.querySelector('.next').addEventListener('click', function () { go(pos + 1); restart(); });
+
+  root.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft')  { go(pos - 1); restart(); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { go(pos + 1); restart(); e.preventDefault(); }
+  });
+
+  // don't rotate while someone is looking at or interacting with a photo
+  stage.addEventListener('mouseenter', stop);
+  stage.addEventListener('mouseleave', start);
+  root.addEventListener('focusin', stop);
+  root.addEventListener('focusout', start);
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop(); else start();
+  });
+
+  go(0);
+  start();
+})();
 </script>
 
 </body>

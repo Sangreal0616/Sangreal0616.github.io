@@ -1,0 +1,6 @@
+# Full-resolution personal photos kept locally only.
+# images/misc/ holds the web-sized copies the site actually serves; these
+# untracked originals are the source for scripts/build_misc.py.
+# Delete these two lines if you'd rather version the originals too.
+/images/mis*.jpg
+/images/mis*.png
