@@ -3,8 +3,17 @@
 Discovers the full-resolution originals in images/ (named mis*.jpg / mis*.png,
 kept out of git) and writes downscaled copies the site actually serves:
 
-    images/misc/NN.jpg          up to 1600px, shown in the viewer
-    images/misc/thumbs/NN.jpg   up to  400px, shown in the grid below it
+    images/misc/<hash>.jpg          up to 1600px, shown in the viewer
+    images/misc/thumbs/<hash>.jpg   up to  400px, shown in the grid below it
+
+Filenames are a hash of the encoded image, which matters because GitHub Pages
+serves these with Cache-Control: max-age=600. Sequential names like 01.jpg get
+reused when the photo set changes, so a returning visitor's browser would keep
+showing whatever it cached under that name -- including photos since deleted.
+Hashing means changed photos get a new URL and unchanged ones stay cached.
+
+The ordered list of filenames is written into misc.html, so the page never
+guesses a URL.
 
 EXIF orientation is applied and then dropped, which both fixes sideways photos
 and strips any GPS coordinates before they go on a public site.
@@ -13,16 +22,17 @@ To add or remove photos: change what's in images/, then rerun
 
     python scripts/build_misc.py
 
-Nothing else needs editing -- the file list is discovered, stale outputs from a
-previous larger set are deleted, and the data-count on misc.html is rewritten
-to match.
+Nothing else needs editing -- the file list is discovered, the manifest in
+misc.html is rewritten, and assets no longer referenced are deleted.
 
 Requires Pillow:  pip install Pillow
 """
+import glob
+import hashlib
+import io
+import json
 import os
 import re
-import io
-import glob
 
 from PIL import Image, ImageOps
 
@@ -34,6 +44,11 @@ PAGE = os.path.join(REPO, "misc.html")
 
 VIEW_MAX = 1600
 THUMB_MAX = 400
+VIEW_QUALITY = 85
+THUMB_QUALITY = 78
+
+MANIFEST_RE = re.compile(
+    r'(<script id="misc-photos" type="application/json">)(.*?)(</script>)', re.S)
 
 
 def sort_key(path):
@@ -55,6 +70,16 @@ def discover():
     return sorted(set(found), key=sort_key)
 
 
+def encode(im, box, quality):
+    """Return (filename, bytes) for a downscaled copy, named by content hash."""
+    copy = im.copy()
+    copy.thumbnail((box, box), Image.LANCZOS)
+    buf = io.BytesIO()
+    copy.save(buf, "JPEG", quality=quality, optimize=True, progressive=True)
+    data = buf.getvalue()
+    return hashlib.sha1(data).hexdigest()[:12] + ".jpg", data
+
+
 def main():
     sources = discover()
     if not sources:
@@ -62,46 +87,49 @@ def main():
 
     os.makedirs(THUMBS, exist_ok=True)
     total_src = total_out = 0
-    keep = set()
+    manifest = []
 
-    for i, src in enumerate(sources, start=1):
+    for src in sources:
         total_src += os.path.getsize(src)
         im = ImageOps.exif_transpose(Image.open(src))
         if im.mode != "RGB":
             im = im.convert("RGB")
 
-        out_name = f"{i:02d}.jpg"
-        keep.add(out_name)
-        for box, quality, folder in ((VIEW_MAX, 85, OUT), (THUMB_MAX, 78, THUMBS)):
-            copy = im.copy()
-            copy.thumbnail((box, box), Image.LANCZOS)
-            path = os.path.join(folder, out_name)
-            copy.save(path, "JPEG", quality=quality, optimize=True, progressive=True)
-            total_out += os.path.getsize(path)
+        pair = []
+        for box, quality, folder in ((VIEW_MAX, VIEW_QUALITY, OUT),
+                                     (THUMB_MAX, THUMB_QUALITY, THUMBS)):
+            name, data = encode(im, box, quality)
+            with open(os.path.join(folder, name), "wb") as fh:
+                fh.write(data)
+            total_out += len(data)
+            pair.append(name)
 
-        print(f"{out_name}  <- {os.path.basename(src)}")
+        manifest.append(pair)
+        print(f"{pair[0]}  <- {os.path.basename(src)}")
 
-    # drop leftovers from a previous, larger run
-    for folder in (OUT, THUMBS):
-        for stale in glob.glob(os.path.join(folder, "*.jpg")):
-            if os.path.basename(stale) not in keep:
-                os.remove(stale)
-                print(f"removed stale {os.path.relpath(stale, REPO)}")
+    # delete anything the manifest no longer points at
+    wanted = {OUT: {p[0] for p in manifest}, THUMBS: {p[1] for p in manifest}}
+    for folder, keep in wanted.items():
+        for path in glob.glob(os.path.join(folder, "*.jpg")):
+            if os.path.basename(path) not in keep:
+                os.remove(path)
+                print(f"removed unreferenced {os.path.relpath(path, REPO)}")
 
-    # keep the page's photo count in sync
+    # write the ordered filename list into the page
     html = io.open(PAGE, encoding="utf-8").read()
-    patched, n = re.subn(r'(id="gallery"[^>]*\bdata-count=")\d+(")',
-                         lambda m: f"{m.group(1)}{len(sources)}{m.group(2)}", html)
-    if n == 1:
-        if patched != html:
-            io.open(PAGE, "w", encoding="utf-8", newline="\n").write(patched)
-            print(f"updated data-count in misc.html -> {len(sources)}")
+    if not MANIFEST_RE.search(html):
+        raise SystemExit('could not find <script id="misc-photos"> in misc.html')
+    body = "\n" + ",\n".join("  " + json.dumps(p) for p in manifest) + "\n"
+    patched = MANIFEST_RE.sub(
+        lambda m: m.group(1) + "[" + body + "]" + m.group(3), html, count=1)
+    if patched != html:
+        io.open(PAGE, "w", encoding="utf-8", newline="\n").write(patched)
+        print(f"\nrewrote manifest in misc.html ({len(manifest)} photos)")
     else:
-        print(f"WARNING: could not find data-count in misc.html "
-              f"(matched {n} times) -- set it to {len(sources)} by hand")
+        print(f"\nmanifest already current ({len(manifest)} photos)")
 
     mb = 1024 * 1024
-    print(f"\n{len(sources)} photos: {total_src / mb:.1f} MB originals "
+    print(f"{len(sources)} photos: {total_src / mb:.1f} MB originals "
           f"-> {total_out / mb:.1f} MB served")
 
 

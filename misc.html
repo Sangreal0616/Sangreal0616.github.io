@@ -28,8 +28,24 @@
     <h2>Miscellaneous</h2>
     <p>A few photos from outside the lab.</p>
 
-    <!-- data-count is kept in sync by scripts/build_misc.py -->
-    <div class="gallery" id="gallery" data-count="11">
+    <!-- [view, thumb] filenames, in order — rewritten by scripts/build_misc.py.
+         Names are content hashes so a changed photo can't be served from a
+         stale cache under a recycled name. -->
+    <script id="misc-photos" type="application/json">[
+  ["869217afa814.jpg", "01dc9313bb91.jpg"],
+  ["6f4bbed71d89.jpg", "8c06d8bb4377.jpg"],
+  ["0d17ffad7095.jpg", "efd4fa590066.jpg"],
+  ["4b637714a0ee.jpg", "d78808ec6b0c.jpg"],
+  ["666e9d23fad8.jpg", "0b0e04d589ce.jpg"],
+  ["3e9d17d7d599.jpg", "ba3cd567f21e.jpg"],
+  ["60c544c31e85.jpg", "05a90bfb768f.jpg"],
+  ["bd70eaa84c74.jpg", "696b8f4a94e2.jpg"],
+  ["845ea4501222.jpg", "5c6609b45ff3.jpg"],
+  ["53be605952f4.jpg", "d14558357937.jpg"],
+  ["98bc195c55d9.jpg", "ccae090701e0.jpg"]
+]</script>
+
+    <div class="gallery" id="gallery">
       <div class="stage">
         <img class="haze" alt="" aria-hidden="true">
         <!-- two layers so one can decode underneath while the other is visible -->
@@ -62,7 +78,9 @@
   var root = document.getElementById('gallery');
   if (!root) return;
 
-  var COUNT = parseInt(root.getAttribute('data-count'), 10);   // images/misc/01.jpg …
+  var tag = document.getElementById('misc-photos');
+  var photos = tag ? JSON.parse(tag.textContent) : [];   // [[view, thumb], …]
+  var COUNT = photos.length;
   if (!COUNT) return;
   var DELAY = 5000;      // ms between auto-advances
 
@@ -72,9 +90,8 @@
   var haze    = root.querySelector('.haze');
   var counter = root.querySelector('.count');
 
-  function pad(n) { return n < 10 ? '0' + n : String(n); }
-  function view(i)  { return 'images/misc/' + pad(i + 1) + '.jpg'; }
-  function thumb(i) { return 'images/misc/thumbs/' + pad(i + 1) + '.jpg'; }
+  function view(i)  { return 'images/misc/' + photos[i][0]; }
+  function thumb(i) { return 'images/misc/thumbs/' + photos[i][1]; }
 
   // Fisher–Yates — the featured photo differs from visit to visit
   var order = [];
